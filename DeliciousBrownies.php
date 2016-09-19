@@ -8,12 +8,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
@@ -70,12 +70,12 @@ class DeliciousBrownies
         /* setup curl */
         $curl_opts = array
         (
-            CURLOPT_SSL_VERIFYPEER     => false, 
-            CURLOPT_SSL_VERIFYHOST     => 2, 
+            CURLOPT_SSL_VERIFYPEER     => false,
+            CURLOPT_SSL_VERIFYHOST     => 2,
             CURLOPT_HEADER             => false,
             CURLOPT_RETURNTRANSFER     => 1,
             CURLOPT_USERAGENT         => $this->_user_agent
-        );        
+        );
         $this->_ch = curl_init();
         curl_setopt_array($this->_ch, $curl_opts);
     }
@@ -150,12 +150,12 @@ class DeliciousBrownies
      */
     private function get($url)
     {
-        /* delay for 1 second. DON'T change this, since del.icio.us required all 
+        /* delay for 1 second. DON'T change this, since del.icio.us required all
            clients to set delay AT LEAST 1 SECOND between requests */
         sleep(1);
 
         curl_setopt($this->_ch, CURLOPT_URL, $url);
-        $res = curl_exec($this->_ch); 
+        $res = curl_exec($this->_ch);
         $this->_info = curl_getinfo($this->_ch);
         
         /* $res now contains XML string or boolean false */
@@ -173,7 +173,7 @@ class DeliciousBrownies
         if ($res == false) {
             return(false);
         }
-        return($this->xml2array($res));    
+        return($this->xml2array($res));
     }
     
     /**
@@ -188,9 +188,9 @@ class DeliciousBrownies
      */
     public function getPosts($tag = '', $url = '')
     {
-        $params = array 
+        $params = array
         (
-            "tag" => $tag, 
+            "tag" => $tag,
             "url" => $url
         );
         $qry = http_build_query($params);
@@ -198,7 +198,7 @@ class DeliciousBrownies
 
         if ($res == false) {
             return(false);
-        }        
+        }
         return($this->xml2array($res));
     }
     
@@ -213,9 +213,9 @@ class DeliciousBrownies
      */
     public function getRecentPosts($tag = '', $count = 15)
     {
-        $params = array 
+        $params = array
         (
-            "tag"     => $tag, 
+            "tag"     => $tag,
             "count" => ($count > 100) ? 100 : $count
         );
         $qry = http_build_query($params);
@@ -223,7 +223,7 @@ class DeliciousBrownies
         
         if ($res == false) {
             return(false);
-        }        
+        }
         return($this->xml2array($res));
     }
     
@@ -241,9 +241,9 @@ class DeliciousBrownies
      */
     public function addPost($url, $desc, $tags = '', $notes = '', $shared = true)
     {
-        $params = array 
+        $params = array
         (
-            "url"             => $url, 
+            "url"             => $url,
             "description" => $desc,
             "tags"          => $tags,
             "extended"      => $notes,
@@ -255,7 +255,7 @@ class DeliciousBrownies
         
         if ($res == false) {
             return(false);
-        }        
+        }
         return($this->xml2bool($res));
     }
     
@@ -273,9 +273,9 @@ class DeliciousBrownies
      */
     public function updatePost($url, $desc, $tags = '', $notes = '', $shared = true)
     {
-        $params = array 
+        $params = array
         (
-            "url"             => $url, 
+            "url"             => $url,
             "description" => $desc,
             "tags"          => $tags,
             "extended"    => $notes,
@@ -287,7 +287,7 @@ class DeliciousBrownies
         
         if ($res == false) {
             return(false);
-        }        
+        }
         return($this->xml2bool($res));
     }
     
@@ -305,7 +305,7 @@ class DeliciousBrownies
         
         if ($res == false) {
             return(false);
-        }        
+        }
         return($this->xml2bool($res));
     }
     
@@ -436,7 +436,7 @@ class DeliciousBrownies
         
         $xml = simplexml_load_string($xmlstr);
         foreach ($xml->children() as $child) {
-            foreach ($child->attributes() as $key=>$val) {
+            foreach ($child->attributes() as $key => $val) {
                 $children[$i][$key] = (string)$val;
             }
             $i++;
@@ -463,11 +463,11 @@ class DeliciousBrownies
         }
         $this->_delicious_msg = $code;
         
-        switch(strtolower($code)) {
-        case 'done':
-            return true;
-        default:
-            return false;
+        switch (strtolower($code)) {
+            case 'done':
+                return true;
+            default:
+                return false;
         }
     }
 

@@ -6,6 +6,8 @@ http://del.icio.us/nashruddin to see the result. I posted all of my blog's pages
 del.icio.us using this class, taking the pages' <META NAME="keywords"> as the posts' 
 tags.
 
+Original Author
+---------------
 Author:  Nashruddin Amin <me@nashruddin.com>
 Version: 1.1
 License: GPL
@@ -21,11 +23,3 @@ Features
 Requirement
 -----------
 * PHP 5 with Curl enabled
-
-Functions & Examples
---------------------
-See doc/reference.html
-
-Contact
--------
-Please send comments and bug reports to me@nashruddin.com.
